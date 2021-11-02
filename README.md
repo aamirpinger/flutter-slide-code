@@ -1,6 +1,6 @@
-# Hello World APP
+# example_2_simple_centered_image
 
-A new Flutter project.
+A Flutter project.
 
 ## Getting Started
 
