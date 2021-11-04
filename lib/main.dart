@@ -11,7 +11,7 @@ void main() {
         ),
         body: Center(
           child: Image(
-            image: NetworkImage('https://i.gifer.com/4Cb2.gif', scale: 2.5),
+            image: AssetImage('images/bulb.jpg'),
           ),
         ),
       ),
