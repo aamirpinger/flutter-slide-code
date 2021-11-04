@@ -16,9 +16,17 @@ class MyApp extends StatelessWidget {
           title: Text('My Flutter App'),
           backgroundColor: Colors.deepOrange,
         ),
-        body: Center(
-          child: Image(
-            image: AssetImage('images/bulb.jpg'),
+        body: SafeArea(
+          child: Container(
+            child: Text(
+              'Hello World',
+              style: TextStyle(fontSize: 24, color: Colors.white),
+            ),
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 12),
+            margin: EdgeInsets.only(left: 10, top: 20),
+            color: Colors.deepOrange,
+            width: 150,
+            height: 70,
           ),
         ),
       ),
