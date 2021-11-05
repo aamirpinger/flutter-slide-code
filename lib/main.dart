@@ -31,8 +31,19 @@ class MyApp extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 12),
                 color: Colors.lightBlue,
               ),
-              Image(
-                image: AssetImage('images/bulb.jpg'),
+              Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xff7c94b6),
+                  image: const DecorationImage(
+                    image: AssetImage('images/bulb.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 8,
+                  ),
+                  borderRadius: BorderRadius.circular(150),
+                ),
                 width: 250,
                 height: 250,
               ),
