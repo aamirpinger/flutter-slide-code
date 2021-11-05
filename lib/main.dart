@@ -43,41 +43,49 @@ class MyApp extends StatelessWidget {
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        image: DecorationImage(
-                          image: AssetImage('images/bulb.jpg'),
-                          fit: BoxFit.cover,
+              SizedBox(
+                height: 250,
+                child: Card(
+                  elevation: 20,
+                  color: Colors.greenAccent.shade100,
+                  shadowColor: Colors.white,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            image: DecorationImage(
+                              image: AssetImage('images/bulb.jpg'),
+                              fit: BoxFit.cover,
+                            ),
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 8,
+                            ),
+                            borderRadius: BorderRadius.circular(150),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.white.withOpacity(0.5),
+                                spreadRadius: 25,
+                                blurRadius: 15,
+                              ),
+                            ]),
+                        width: 150,
+                        height: 150,
+                      ),
+                      Text(
+                        'Idea!!',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 48,
+                          fontFamily: 'Calligraffitti',
+                          fontWeight: FontWeight.bold,
                         ),
-                        border: Border.all(
-                          color: Colors.black,
-                          width: 8,
-                        ),
-                        borderRadius: BorderRadius.circular(150),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.white.withOpacity(0.5),
-                            spreadRadius: 25,
-                            blurRadius: 15,
-                          ),
-                        ]),
-                    width: 150,
-                    height: 150,
+                      )
+                    ],
                   ),
-                  Text(
-                    'Idea!!',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 48,
-                      fontFamily: 'Calligraffitti',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                ],
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
