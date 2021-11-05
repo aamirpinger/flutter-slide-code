@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.deepOrange,
         ),
         body: SafeArea(
-          child: Column(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             // verticalDirection: VerticalDirection.up, // try this
             // mainAxisSize: MainAxisSize.min, // try this
@@ -33,6 +33,8 @@ class MyApp extends StatelessWidget {
               ),
               Image(
                 image: AssetImage('images/bulb.jpg'),
+                width: 250,
+                height: 250,
               ),
             ],
           ),
