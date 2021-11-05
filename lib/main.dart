@@ -25,11 +25,21 @@ class MyApp extends StatelessWidget {
                     color: Colors.amberAccent,
                     width: 195,
                     height: 200,
+                    child: Icon(
+                      Icons.settings_accessibility_outlined,
+                      color: Colors.green,
+                      size: 50,
+                    ),
                   ),
                   Container(
                     color: Colors.blue,
                     width: 195,
                     height: 200,
+                    child: Icon(
+                      Icons.star_border,
+                      color: Colors.red,
+                      size: 50,
+                    ),
                   ),
                 ],
               ),
@@ -77,11 +87,21 @@ class MyApp extends StatelessWidget {
                     color: Colors.purple,
                     width: 195,
                     height: 200,
+                    child: Icon(
+                      Icons.perm_identity_outlined,
+                      color: Colors.yellow,
+                      size: 50,
+                    ),
                   ),
                   Container(
                     color: Colors.lightGreenAccent,
                     width: 195,
                     height: 200,
+                    child: Icon(
+                      Icons.star,
+                      color: Colors.blue,
+                      size: 50,
+                    ),
                   ),
                 ],
               ),
