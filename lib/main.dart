@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
                 ],
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
                     decoration: BoxDecoration(
@@ -53,9 +55,18 @@ class MyApp extends StatelessWidget {
                             blurRadius: 15,
                           ),
                         ]),
-                    width: 250,
-                    height: 250,
+                    width: 150,
+                    height: 150,
                   ),
+                  Text(
+                    'Idea!!',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 48,
+                      fontFamily: 'Calligraffitti',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
                 ],
               ),
               Row(
