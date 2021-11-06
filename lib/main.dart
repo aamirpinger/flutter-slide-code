@@ -74,14 +74,37 @@ class MyApp extends StatelessWidget {
                         width: 150,
                         height: 150,
                       ),
-                      Text(
-                        'Idea!!',
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 48,
-                          fontFamily: 'Calligraffitti',
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Idea!!',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 48,
+                              fontFamily: 'Calligraffitti',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          LimitedBox(
+                            maxWidth: 120,
+                            child: ListTile(
+                              horizontalTitleGap: 0,
+                              minLeadingWidth: 35,
+                              tileColor: Colors.grey.shade400,
+                              leading: Icon(
+                                Icons.facebook,
+                                size: 30,
+                                color: Colors.indigo.shade900,
+                              ),
+                              title: Text(
+                                '@idea',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 18),
+                              ),
+                            ),
+                          )
+                        ],
                       )
                     ],
                   ),
