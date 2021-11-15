@@ -20,7 +20,7 @@ class Score extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       'Score: ${score} / ${totalAttempted}',
-      style: getTextStyle(FontWeight.bold, 36, Colors.black),
+      style: Theme.of(context).textTheme.headline4,
     );
   }
 }
