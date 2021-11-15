@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'infoWidget.dart';
+
 class CustomCard extends StatelessWidget {
   CustomCard({
     this.headingWidget,
@@ -8,6 +10,8 @@ class CustomCard extends StatelessWidget {
     this.height,
     this.backgroundColor,
     this.shadowColor,
+    this.onTapFunction,
+    this.info,
   });
 
   final double? elevation;
@@ -16,23 +20,31 @@ class CustomCard extends StatelessWidget {
   final double? height;
   final Color? backgroundColor;
   final Color? shadowColor;
+  final void Function()? onTapFunction;
+  final String? info;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: SizedBox(
-        height: height,
-        child: Card(
-          color: backgroundColor,
-          shadowColor: shadowColor,
-          elevation: elevation,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(child: headingWidget),
-              Container(child: bodyWidget)
-            ],
+      child: GestureDetector(
+        onTap: onTapFunction != null ? onTapFunction! : () => null,
+        child: SizedBox(
+          height: height,
+          child: Card(
+            color: backgroundColor,
+            shadowColor: shadowColor,
+            elevation: elevation,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(child: headingWidget),
+                Container(child: bodyWidget),
+                info != null
+                    ? Container(child: InfoWidget(text: info!))
+                    : Container(),
+              ],
+            ),
           ),
         ),
       ),

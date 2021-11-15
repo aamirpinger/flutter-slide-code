@@ -90,13 +90,8 @@ class _FlashCardState extends State<FlashCard> {
               style: getTextStyle(FontWeight.bold, 36, Colors.indigo),
             ),
             height: 200,
-          ),
-          Center(
-            child: CustomButton(
-              title: 'Show ${showAnswer ? 'Question' : 'Answer'}',
-              backgroundColor: Colors.blueAccent,
-              onPress: toggleShowAnswer,
-            ),
+            onTapFunction: toggleShowAnswer,
+            info: 'Tap this card to toggle question/answer.',
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
