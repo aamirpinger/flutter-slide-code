@@ -12,6 +12,25 @@ class FlashCardApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+          scaffoldBackgroundColor: Colors.lightBlue.shade50,
+          primaryColor: Colors.red,
+          appBarTheme: AppBarTheme(backgroundColor: Colors.indigo),
+          floatingActionButtonTheme:
+              FloatingActionButtonThemeData(backgroundColor: Colors.indigo),
+          textTheme: TextTheme(
+            headline4: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 36,
+              color: Colors.black,
+            ),
+            headline5: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 36,
+              color: Colors.indigo,
+            ),
+          )),
+      // theme: ThemeData.dark(),
       home: FlashCard(),
     );
   }
@@ -60,7 +79,7 @@ class _FlashCardState extends State<FlashCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue.shade50,
+      // backgroundColor: Colors.lightBlue.shade50,
       appBar: AppBar(
         title: Text('Guess the Capital City'),
         centerTitle: true,
@@ -71,23 +90,22 @@ class _FlashCardState extends State<FlashCard> {
         children: [
           Center(
             child: CustomCard(
-              bodyWidget: Score(
-                score: quiz.score,
-                totalAttempted: quiz.totalAttempted,
-              ),
-              backgroundColor: Colors.lightBlue.shade50,
-            ),
+                bodyWidget: Score(
+                  score: quiz.score,
+                  totalAttempted: quiz.totalAttempted,
+                ),
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor),
           ),
           CustomCard(
             headingWidget: Text(
               !showAnswer ? 'Country:' : 'Capital',
-              style: getTextStyle(FontWeight.bold, 36, Colors.black),
+              style: Theme.of(context).textTheme.headline4,
             ),
             bodyWidget: Text(
               !showAnswer
                   ? countries.getCountry(quiz.currentIndex)
                   : countries.getCapital(quiz.currentIndex),
-              style: getTextStyle(FontWeight.bold, 36, Colors.indigo),
+              style: Theme.of(context).textTheme.headline5,
             ),
             height: 200,
             onTapFunction: toggleShowAnswer,
