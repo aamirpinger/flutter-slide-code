@@ -1,55 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/infoWidget.dart';
-import 'package:my_app/routes.dart';
-import 'package:my_app/utils.dart';
-import 'countries.dart';
-import 'custom_button.dart';
-import 'custom_card.dart';
-import 'quiz.dart';
-import 'score.dart';
+import 'package:my_app/constant/app_strings.dart';
+import 'package:my_app/core/class/countries.dart';
+import 'package:my_app/core/class/quiz.dart';
+import 'package:my_app/core/class/score.dart';
+import 'package:my_app/core/utils/utils.dart';
+import 'package:my_app/ui/screens/result_screen.dart';
+import 'package:my_app/ui/widgets/custom_button.dart';
+import 'package:my_app/ui/widgets/custom_card.dart';
+import 'package:my_app/ui/widgets/infoWidget.dart';
 
-class FlashCardApp extends StatelessWidget {
-  const FlashCardApp({Key? key}) : super(key: key);
+import 'about_screen.dart';
 
-  static const routeName = '/';
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-          scaffoldBackgroundColor: Colors.lightBlue.shade50,
-          primaryColor: Colors.red,
-          appBarTheme: AppBarTheme(backgroundColor: Colors.indigo),
-          floatingActionButtonTheme:
-              FloatingActionButtonThemeData(backgroundColor: Colors.indigo),
-          textTheme: TextTheme(
-            headline4: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 36,
-              color: Colors.black,
-            ),
-            headline5: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 36,
-              color: Colors.indigo,
-            ),
-          )),
-      // theme: ThemeData.dark(),
-      // home: FlashCard(), //  <---- we cannot use home and initial route together
-      initialRoute: FlashCardApp.routeName,
-      onGenerateRoute: CustomRoutes.generateRoute,
-    );
-  }
-}
-
-class FlashCard extends StatefulWidget {
-  const FlashCard({Key? key}) : super(key: key);
+class FlashCardScreen extends StatefulWidget {
+  const FlashCardScreen({Key? key}) : super(key: key);
 
   @override
-  _FlashCardState createState() => _FlashCardState();
+  _FlashCardScreenState createState() => _FlashCardScreenState();
 }
 
-class _FlashCardState extends State<FlashCard> {
+class _FlashCardScreenState extends State<FlashCardScreen> {
   bool showAnswer = false;
   bool showAlert = false;
 
@@ -92,9 +61,8 @@ class _FlashCardState extends State<FlashCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.lightBlue.shade50,
       appBar: AppBar(
-        title: Text('Guess the Capital City'),
+        title: Text(AppStrings.appTitle),
         centerTitle: true,
       ),
       body: Column(
@@ -102,9 +70,9 @@ class _FlashCardState extends State<FlashCard> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           GestureDetector(
-            onTap: () => Navigator.pushNamed(context, '/about'),
+            onTap: () => Navigator.pushNamed(context, AboutScreen.routeName),
             child: InfoWidget(
-              text: 'ABOUT',
+              text: AppStrings.about,
               color: Colors.red,
               fontSize: 18,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -120,7 +88,7 @@ class _FlashCardState extends State<FlashCard> {
           ),
           CustomCard(
             headingWidget: Text(
-              !showAnswer ? 'Country:' : 'Capital',
+              !showAnswer ? AppStrings.country : AppStrings.capital,
               style: Theme.of(context).textTheme.headline4,
             ),
             bodyWidget: Text(
@@ -131,18 +99,18 @@ class _FlashCardState extends State<FlashCard> {
             ),
             height: 350,
             onTapFunction: toggleShowAnswer,
-            info: 'Tap this card to toggle question/answer.',
+            info: AppStrings.toggleCardMessage,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CustomButton(
-                title: 'Correct',
+                title: AppStrings.correct,
                 backgroundColor: Colors.green,
                 onPress: markAnswerAsCorrect,
               ),
               CustomButton(
-                title: 'Wrong',
+                title: AppStrings.wrong,
                 backgroundColor: Colors.red,
                 onPress: markAnswerAsWrong,
               ),
@@ -152,10 +120,11 @@ class _FlashCardState extends State<FlashCard> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomButton(
-                title: 'Show Result',
+                title: AppStrings.showResult,
                 backgroundColor: Colors.blue,
                 onPress: () {
-                  Navigator.pushNamed(context, '/result', arguments: quiz)
+                  Navigator.pushNamed(context, ResultScreen.routeName,
+                          arguments: quiz)
                       .then((value) => resetQuiz());
                 },
               ),
@@ -166,7 +135,7 @@ class _FlashCardState extends State<FlashCard> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: resetQuiz,
-        child: Text('Reset'),
+        child: Text(AppStrings.reset),
       ),
     );
   }

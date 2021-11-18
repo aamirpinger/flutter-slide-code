@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'utils.dart';
-
 class Score extends StatelessWidget {
   Score({
     score = 0,

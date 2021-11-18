@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'flash_card_app.dart';
+import 'ui/screens/flash_card_app.dart';
 
 void main() {
   runApp(FlashCardApp());
