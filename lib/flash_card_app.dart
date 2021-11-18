@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/about_screen.dart';
 import 'package:my_app/infoWidget.dart';
-import 'package:my_app/result_screen.dart';
+import 'package:my_app/routes.dart';
 import 'package:my_app/utils.dart';
 import 'countries.dart';
 import 'custom_button.dart';
@@ -11,6 +10,8 @@ import 'score.dart';
 
 class FlashCardApp extends StatelessWidget {
   const FlashCardApp({Key? key}) : super(key: key);
+
+  static const routeName = '/';
 
   @override
   Widget build(BuildContext context) {
@@ -35,24 +36,8 @@ class FlashCardApp extends StatelessWidget {
           )),
       // theme: ThemeData.dark(),
       // home: FlashCard(), //  <---- we cannot use home and initial route together
-      initialRoute: '/',
-      routes: {
-        '/': (context) => FlashCard(),
-        '/about': (context) => AboutScreen(),
-      },
-      onGenerateRoute: (settings) {
-        if (settings.name == '/result') {
-          final args = settings.arguments as Quiz;
-          return MaterialPageRoute(
-            builder: (context) {
-              return ResultScreen(
-                score: args.score,
-                totalAttempted: args.totalAttempted,
-              );
-            },
-          );
-        }
-      },
+      initialRoute: FlashCardApp.routeName,
+      onGenerateRoute: CustomRoutes.generateRoute,
     );
   }
 }
