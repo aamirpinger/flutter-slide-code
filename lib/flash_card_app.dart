@@ -33,7 +33,12 @@ class FlashCardApp extends StatelessWidget {
             ),
           )),
       // theme: ThemeData.dark(),
-      home: FlashCard(),
+      // home: FlashCard(), //  <---- we cannot use home and initial route together
+      initialRoute: '/',
+      routes: {
+        '/': (context) => FlashCard(),
+        '/about': (context) => AboutScreen(),
+      },
     );
   }
 }
@@ -91,10 +96,7 @@ class _FlashCardState extends State<FlashCard> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           GestureDetector(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => AboutScreen()),
-            ),
+            onTap: () => Navigator.pushNamed(context, '/about'),
             child: InfoWidget(
               text: 'ABOUT',
               color: Colors.red,
