@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/about_screen.dart';
+import 'package:my_app/infoWidget.dart';
 import 'package:my_app/utils.dart';
 import 'countries.dart';
 import 'custom_button.dart';
@@ -85,9 +87,21 @@ class _FlashCardState extends State<FlashCard> {
         centerTitle: true,
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AboutScreen()),
+            ),
+            child: InfoWidget(
+              text: 'ABOUT',
+              color: Colors.red,
+              fontSize: 18,
+              mainAxisAlignment: MainAxisAlignment.end,
+            ),
+          ),
           Center(
             child: CustomCard(
                 bodyWidget: Score(
@@ -107,7 +121,7 @@ class _FlashCardState extends State<FlashCard> {
                   : countries.getCapital(quiz.currentIndex),
               style: Theme.of(context).textTheme.headline5,
             ),
-            height: 200,
+            height: 400,
             onTapFunction: toggleShowAnswer,
             info: 'Tap this card to toggle question/answer.',
           ),
