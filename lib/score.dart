@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 import 'utils.dart';
 
 class Score extends StatelessWidget {
-  Score({int score = 0, int totalAttempted = 0})
-      : this._score = score,
-        this._totalAttempted = totalAttempted;
+  Score({
+    score = 0,
+    int totalAttempted = 0,
+    TextStyle? textStyle,
+  })  : this._score = score,
+        this._totalAttempted = totalAttempted,
+        this._textStyle = textStyle;
 
   int _score;
   int _totalAttempted;
+  TextStyle? _textStyle;
 
   int get score => _score;
   void set score(int num) => _score = num;
@@ -20,7 +25,9 @@ class Score extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       'Score: ${score} / ${totalAttempted}',
-      style: Theme.of(context).textTheme.headline4,
+      style: _textStyle != null
+          ? _textStyle
+          : Theme.of(context).textTheme.headline4,
     );
   }
 }
