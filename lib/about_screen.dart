@@ -3,6 +3,8 @@ import 'package:my_app/custom_button.dart';
 import 'package:my_app/custom_card.dart';
 
 class AboutScreen extends StatelessWidget {
+  static const routeName = '/about';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

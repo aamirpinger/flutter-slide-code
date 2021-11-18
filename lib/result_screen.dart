@@ -6,6 +6,8 @@ import 'package:my_app/score.dart';
 class ResultScreen extends StatelessWidget {
   ResultScreen({required this.score, required this.totalAttempted});
 
+  static const routeName = '/result';
+
   final int score;
   final int totalAttempted;
 
