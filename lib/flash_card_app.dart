@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/about_screen.dart';
 import 'package:my_app/infoWidget.dart';
+import 'package:my_app/result_screen.dart';
 import 'package:my_app/utils.dart';
 import 'countries.dart';
 import 'custom_button.dart';
@@ -39,6 +40,19 @@ class FlashCardApp extends StatelessWidget {
         '/': (context) => FlashCard(),
         '/about': (context) => AboutScreen(),
       },
+      onGenerateRoute: (settings) {
+        if (settings.name == '/result') {
+          final args = settings.arguments as Quiz;
+          return MaterialPageRoute(
+            builder: (context) {
+              return ResultScreen(
+                score: args.score,
+                totalAttempted: args.totalAttempted,
+              );
+            },
+          );
+        }
+      },
     );
   }
 }
@@ -56,6 +70,13 @@ class _FlashCardState extends State<FlashCard> {
 
   final countries = Countries();
   final quiz = Quiz();
+
+  void resetQuiz() {
+    setState(() {
+      quiz.reset();
+      showAnswer = false;
+    });
+  }
 
   void toggleShowAnswer() {
     setState(() {
@@ -123,7 +144,7 @@ class _FlashCardState extends State<FlashCard> {
                   : countries.getCapital(quiz.currentIndex),
               style: Theme.of(context).textTheme.headline5,
             ),
-            height: 400,
+            height: 350,
             onTapFunction: toggleShowAnswer,
             info: 'Tap this card to toggle question/answer.',
           ),
@@ -142,16 +163,24 @@ class _FlashCardState extends State<FlashCard> {
               ),
             ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomButton(
+                title: 'Show Result',
+                backgroundColor: Colors.blue,
+                onPress: () {
+                  Navigator.pushNamed(context, '/result', arguments: quiz)
+                      .then((value) => resetQuiz());
+                },
+              ),
+            ],
+          ),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            quiz.reset();
-            showAnswer = false;
-          });
-        },
+        onPressed: resetQuiz,
         child: Text('Reset'),
       ),
     );
