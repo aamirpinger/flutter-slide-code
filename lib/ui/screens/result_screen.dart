@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/custom_button.dart';
-import 'package:my_app/custom_card.dart';
-import 'package:my_app/score.dart';
+import 'package:my_app/constant/app_strings.dart';
+import 'package:my_app/ui/widgets/custom_button.dart';
+import 'package:my_app/ui/widgets/custom_card.dart';
+import 'package:my_app/core/class/score.dart';
 
 class ResultScreen extends StatelessWidget {
   ResultScreen({required this.score, required this.totalAttempted});
@@ -15,7 +16,7 @@ class ResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Result Screen'),
+        title: Text(AppStrings.resultScreen),
         centerTitle: true,
         automaticallyImplyLeading: false, // to hide the back button
       ),
@@ -25,7 +26,7 @@ class ResultScreen extends StatelessWidget {
           CustomCard(
             height: 300,
             headingWidget: Text(
-              'Quiz Ended :',
+              AppStrings.quizEnded,
               style: Theme.of(context).textTheme.headline4,
             ),
             bodyWidget: Padding(
@@ -38,10 +39,10 @@ class ResultScreen extends StatelessWidget {
             ),
           ),
           CustomButton(
-            title: 'Restart',
+            title: AppStrings.restart,
             backgroundColor: Colors.blue,
             onPress: () {
-              Navigator.pop(context, {"name": "aamir"});
+              Navigator.pop(context);
             },
           ),
         ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/constant/app_strings.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 void showEOLAlert(
@@ -6,6 +7,6 @@ void showEOLAlert(
 ) =>
     Alert(
       context: context,
-      title: "ALERT",
-      desc: "You have already reached to the end of list.",
+      title: AppStrings.alert,
+      desc: AppStrings.endOfListMessage,
     ).show();

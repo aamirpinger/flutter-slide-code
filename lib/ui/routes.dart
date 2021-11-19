@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/about_screen.dart';
-import 'package:my_app/flash_card_app.dart';
-import 'package:my_app/quiz.dart';
-import 'package:my_app/result_screen.dart';
+import 'package:my_app/core/class/quiz.dart';
+import 'package:my_app/ui/screens/about_screen.dart';
+import 'package:my_app/ui/screens/flash_card_app.dart';
+import 'package:my_app/ui/screens/flash_card_screen.dart';
+import 'package:my_app/ui/screens/result_screen.dart';
 
-class CustomRoutes {
+abstract class CustomRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case FlashCardApp.routeName:
-        return MaterialPageRoute(builder: (_) => FlashCard());
+        return MaterialPageRoute(builder: (_) => FlashCardScreen());
 
       case AboutScreen.routeName:
         return MaterialPageRoute(builder: (_) => AboutScreen());
@@ -25,7 +26,7 @@ class CustomRoutes {
         );
 
       default:
-        return MaterialPageRoute(builder: (_) => FlashCard());
+        return MaterialPageRoute(builder: (_) => FlashCardScreen());
     }
   }
 }

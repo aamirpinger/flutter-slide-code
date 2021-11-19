@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/custom_button.dart';
-import 'package:my_app/custom_card.dart';
+import 'package:my_app/constant/app_strings.dart';
+import 'package:my_app/ui/widgets/custom_button.dart';
+import 'package:my_app/ui/widgets/custom_card.dart';
 
 class AboutScreen extends StatelessWidget {
   static const routeName = '/about';
@@ -9,7 +10,7 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('About Screen'),
+        title: Text(AppStrings.aboutScreen),
         centerTitle: true,
       ),
       body: Column(
@@ -20,14 +21,14 @@ class AboutScreen extends StatelessWidget {
             bodyWidget: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'This app is developed during the flutter course by Aamir Pinger.',
+                AppStrings.aboutApp.toUpperCase(),
                 style: Theme.of(context).textTheme.headline4,
                 textAlign: TextAlign.center,
               ),
             ),
           ),
           CustomButton(
-            title: 'Return Back',
+            title: AppStrings.returnBack,
             backgroundColor: Colors.blue,
             onPress: () {
               Navigator.pop(context);
