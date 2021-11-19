@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:my_app/ui/screens/dictionary_app.dart';
+
 void main() {
-  runApp(MaterialApp(
-    home: Center(
-      child: Text(
-        'Hello world',
-      ),
-    ),
-  ));
+  runApp(DictionaryApp());
 }
