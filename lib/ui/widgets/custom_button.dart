@@ -16,7 +16,15 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton(
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(backgroundColor)),
-      onPressed: () => onPress(),
+      onPressed: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+
+        onPress();
+      },
       child: title,
     );
   }

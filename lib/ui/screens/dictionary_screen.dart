@@ -4,6 +4,7 @@ import 'package:my_app/core/services/dictionary_services.dart';
 import 'package:my_app/core/word.dart';
 import 'package:my_app/ui/widgets/custom_button.dart';
 import 'package:my_app/ui/widgets/custom_text_field.dart';
+import 'package:my_app/ui/widgets/meaning_card.dart';
 
 class DictionaryScreen extends StatefulWidget {
   const DictionaryScreen({Key? key}) : super(key: key);
@@ -15,25 +16,34 @@ class DictionaryScreen extends StatefulWidget {
 class _DictionaryScreenState extends State<DictionaryScreen> {
   DictionaryService dictionaryService = DictionaryService();
   String searchingWord = '';
+  Word? word;
 
   void updateUI(String value) {
     setState(() {
       searchingWord = value;
+      word = null;
     });
   }
 
   Future<void> getData() async {
+    if (searchingWord.isEmpty) {
+      return;
+    }
+
     Word? response = await dictionaryService.getData(searchingWord);
     if (response != null) {
-      print(response.word);
-      print(response.meaning);
-      print(response.audioUrl);
+      setState(() {
+        searchingWord = '';
+        word = response;
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // this helps show keyboard appear at top and do not affect other widgets
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(AppStrings.appTitle),
         centerTitle: true,
@@ -57,9 +67,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                     size: 32,
                   ),
                   onPress: () async {
-                    print('fetching data');
                     await getData();
-                    print('fetching data complete');
                   },
                 ),
               ),
@@ -75,6 +83,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                   style: Theme.of(context).textTheme.headline4,
                 )
               : Container(),
+          word != null ? MeaningCard(word!) : Container(),
         ],
       ),
     );
