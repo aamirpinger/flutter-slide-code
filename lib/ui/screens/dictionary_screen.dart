@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/constants/app_strings.dart';
+import 'package:my_app/core/services/dictionary_services.dart';
+import 'package:my_app/core/word.dart';
 import 'package:my_app/ui/widgets/custom_button.dart';
 import 'package:my_app/ui/widgets/custom_text_field.dart';
 
@@ -11,12 +13,22 @@ class DictionaryScreen extends StatefulWidget {
 }
 
 class _DictionaryScreenState extends State<DictionaryScreen> {
+  DictionaryService dictionaryService = DictionaryService();
   String searchingWord = '';
 
   void updateUI(String value) {
     setState(() {
       searchingWord = value;
     });
+  }
+
+  Future<void> getData() async {
+    Word? response = await dictionaryService.getData(searchingWord);
+    if (response != null) {
+      print(response.word);
+      print(response.meaning);
+      print(response.audioUrl);
+    }
   }
 
   @override
@@ -44,7 +56,11 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                     Icons.near_me,
                     size: 32,
                   ),
-                  onPress: () {},
+                  onPress: () async {
+                    print('fetching data');
+                    await getData();
+                    print('fetching data complete');
+                  },
                 ),
               ),
             ],
