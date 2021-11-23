@@ -8,7 +8,7 @@ abstract class CustomTheme {
       textTheme: TextTheme(
         headline4: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 36,
+          fontSize: 24,
           color: Colors.white,
         ),
         headline5: TextStyle(
