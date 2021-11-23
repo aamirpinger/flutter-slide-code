@@ -5,6 +5,10 @@ abstract class CustomTheme {
       scaffoldBackgroundColor: Colors.blueGrey.shade900,
       primaryColor: Colors.amber,
       appBarTheme: AppBarTheme(backgroundColor: Colors.blueGrey.shade900),
+      cardTheme: CardTheme(
+          color: Colors.blueGrey.shade900,
+          shadowColor: Colors.grey,
+          elevation: 30),
       textTheme: TextTheme(
         headline4: TextStyle(
           fontWeight: FontWeight.bold,
