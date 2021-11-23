@@ -15,9 +15,6 @@ class DictionaryScreen extends StatefulWidget {
 class _DictionaryScreenState extends State<DictionaryScreen> {
   DictionaryService dictionaryService = DictionaryService();
   String searchingWord = '';
-  String word = '';
-  String meaning = '';
-  String audioFile = '';
 
   void updateUI(String value) {
     setState(() {
@@ -26,7 +23,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
   }
 
   Future<void> getData() async {
-    Word? response = await dictionaryService.getData(word);
+    Word? response = await dictionaryService.getData(searchingWord);
     if (response != null) {
       print(response.word);
       print(response.meaning);
