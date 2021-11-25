@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:my_app/constants/app_strings.dart';
 import 'package:my_app/core/services/dictionary_services.dart';
 import 'package:my_app/core/word.dart';
@@ -20,12 +21,28 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
 
   @override
   void initState() {
+    EasyLoading.instance
+      ..loadingStyle = EasyLoadingStyle.custom
+      ..progressColor = Colors.grey.shade500
+      ..indicatorColor = Colors.amber
+      ..backgroundColor = Colors.blueGrey.shade900
+      ..textColor = Colors.amber
+      ..maskColor = Colors.blue.withOpacity(0)
+      ..userInteractions = true
+      ..dismissOnTap = false;
+
+    EasyLoading.show(status: AppStrings.loading);
+
     // init state cannot be async.
-    dictionaryService.getRandomWordMeaning().then((Word? value) {
-      setState(() {
-        word = value;
-      });
-    }).catchError((onError) => print('error'));
+    dictionaryService
+        .getRandomWordMeaning()
+        .then((Word? value) {
+          setState(() {
+            word = value;
+          });
+        })
+        .catchError((onError) => print('error'))
+        .whenComplete(() => EasyLoading.dismiss());
 
     super.initState();
   }
@@ -42,7 +59,10 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
       return;
     }
 
+    EasyLoading.show(status: AppStrings.loading);
     Word? response = await dictionaryService.getData(searchingWord);
+    EasyLoading.dismiss();
+
     if (response != null) {
       setState(() {
         searchingWord = '';
