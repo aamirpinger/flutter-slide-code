@@ -12,13 +12,14 @@ class DictionaryService {
     if (response.statusCode == 200) {
       String data = response.body;
 
-      dynamic parsedData = jsonDecode(data)[0];
+      dynamic parsedData = jsonDecode(data)?[0];
       if (parsedData == null) {
         throw new Exception(ErrorStrings.invalidData);
       }
+
       String meaning =
-          parsedData['shortdef'].length != 0 ? parsedData['shortdef'][0] : '';
-      String audioName = parsedData['hwi']['prs'].length != 0
+          parsedData?['shortdef']?.length != 0 ? parsedData['shortdef'][0] : '';
+      String audioName = parsedData?['hwi']?['prs'].length != 0
           ? parsedData['hwi']['prs'][0]['sound']['audio']
           : '';
 
@@ -26,7 +27,6 @@ class DictionaryService {
           word: word, meaning: meaning, audioUrl: getAudioUrl(audioName));
       // getAudioUrl
     } else {
-      print(response.statusCode);
       return null;
     }
   }
@@ -46,9 +46,33 @@ class DictionaryService {
     } else if (!startWithAlphabetsOnly.hasMatch(audioFileName)) {
       folderName = '_';
     } else {
-      folderName = audioFileName[0];
+      folderName = audioFileName.isNotEmpty ? audioFileName[0] : '';
     }
 
-    return '${Configs.audioBaseUrl}${folderName}/${audioFileName}${Configs.audioFileExtension}';
+    return folderName.isNotEmpty
+        ? '${Configs.audioBaseUrl}${folderName}/${audioFileName}${Configs.audioFileExtension}'
+        : '';
+  }
+
+  Future<Word?> getRandomWordMeaning() async {
+    String word = await getRandomWord();
+    return getData(word);
+  }
+
+  Future<String> getRandomWord() async {
+    http.Response response =
+        await http.get(Uri.parse(Configs.randomWordAPIUrl));
+
+    if (response.statusCode != 200) {
+      throw new Exception(ErrorStrings.na);
+    }
+    String data = response.body;
+
+    String word = jsonDecode(data)[0];
+    if (word == null) {
+      throw new Exception(ErrorStrings.invalidData);
+    }
+
+    return word;
   }
 }
