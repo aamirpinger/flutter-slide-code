@@ -18,6 +18,18 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
   String searchingWord = '';
   Word? word;
 
+  @override
+  void initState() {
+    // init state cannot be async.
+    dictionaryService.getRandomWordMeaning().then((Word? value) {
+      setState(() {
+        word = value;
+      });
+    }).catchError((onError) => print('error'));
+
+    super.initState();
+  }
+
   void updateUI(String value) {
     setState(() {
       searchingWord = value;

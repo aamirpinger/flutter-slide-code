@@ -5,4 +5,5 @@ abstract class Configs {
   static const audioBaseUrl =
       'https://media.merriam-webster.com/audio/prons/en/us/mp3/';
   static const audioFileExtension = '.mp3';
+  static const randomWordAPIUrl = 'https://random-word-api.herokuapp.com/word';
 }
