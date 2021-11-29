@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.my.app.my_app">
+    package="com.flutter.notification.app">
    <application
         android:label="my_app"
         android:icon="@mipmap/ic_launcher">

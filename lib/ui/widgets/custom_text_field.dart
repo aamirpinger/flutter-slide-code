@@ -4,14 +4,16 @@ class CustomTextField extends StatelessWidget {
   CustomTextField({
     required this.onChange,
     this.controller,
-    this.hintText,
+    this.hintText = '',
     this.leading,
+    this.obscureText = false,
   });
 
   final Function(String) onChange;
   final TextEditingController? controller;
-  String? hintText = '';
+  String? hintText;
   Widget? leading;
+  bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,7 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         onChanged: onChange,
+        obscureText: obscureText,
       ),
     );
   }
