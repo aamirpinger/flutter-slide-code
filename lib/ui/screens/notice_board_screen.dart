@@ -8,6 +8,7 @@ import 'package:my_app/core/services/db_service.dart';
 import 'package:my_app/ui/screens/login_screen.dart';
 import 'package:my_app/ui/widgets/custom_button.dart';
 import 'package:my_app/ui/widgets/custom_text_field.dart';
+import 'package:my_app/ui/widgets/drawer_menu.dart';
 import 'package:my_app/ui/widgets/no_notifications.dart';
 import 'package:my_app/ui/widgets/notification_bubble.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -29,11 +30,13 @@ class _NoticeBoardScreenState extends State<NoticeBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       // this helps show keyboard appear at top and do not affect other widgets
       resizeToAvoidBottomInset: true,
+      drawer: DrawerMenu(),
       appBar: AppBar(
-        leading: null,
-        automaticallyImplyLeading: false,
+        // leading: null,
+        // automaticallyImplyLeading: false,
         title: Text(AppStrings.appTitle),
         centerTitle: true,
         actions: [
