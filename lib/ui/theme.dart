@@ -13,15 +13,20 @@ abstract class CustomTheme {
           shadowColor: Colors.grey,
           elevation: 30),
       textTheme: TextTheme(
+        bodyText1: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+          color: Color(0xFF050A30),
+        ),
         headline4: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 24,
-          color: Colors.white,
+          color: Color(0xFF050A30),
         ),
         headline5: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 36,
-          color: Colors.indigo,
+          color: Color(0xFF050A30),
         ),
       ));
 }

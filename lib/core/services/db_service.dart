@@ -6,6 +6,8 @@ import 'package:my_app/constants/error_strings.dart';
 
 abstract class DBBase {
   Future<String?> addNotification(String notification, String uid);
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getSnapshots();
 }
 
 class DBService implements DBBase {
@@ -40,4 +42,8 @@ class DBService implements DBBase {
       rethrow;
     }
   }
+
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>> getSnapshots() =>
+      _firestore.collection(Configs.notificationsCollection).snapshots();
 }
