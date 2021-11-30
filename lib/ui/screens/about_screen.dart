@@ -6,7 +6,7 @@ import 'package:my_app/constants/configs.dart';
 import 'package:my_app/core/services/auth_service.dart';
 import 'package:my_app/ui/widgets/custom_button.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'login_screen.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -80,7 +80,12 @@ class AboutScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(18.0),
-              child: Text(AppStrings.aboutText),
+              child: AnimatedTextKit(
+                repeatForever: false,
+                animatedTexts: [
+                  TypewriterAnimatedText(AppStrings.aboutText),
+                ],
+              ),
             )
           ],
         ),
