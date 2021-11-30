@@ -9,4 +9,5 @@ abstract class ErrorStrings {
   static String enterValidCredentials = "Enter valid credentials.";
   static String userNotFound = 'User not found. or credentials are incorrect';
   static String emailCannotBeEmpty = 'Email cannot be empty.';
+  static String unableToAdd = 'Unable to add record.';
 }

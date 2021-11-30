@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:my_app/constants/app_strings.dart';
 import 'package:my_app/core/services/auth_service.dart';
+import 'package:my_app/core/services/db_service.dart';
 import 'package:my_app/ui/screens/login_screen.dart';
 import 'package:my_app/ui/widgets/custom_button.dart';
+import 'package:my_app/ui/widgets/custom_text_field.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class NoticeBoardScreen extends StatefulWidget {
@@ -15,12 +17,16 @@ class NoticeBoardScreen extends StatefulWidget {
 
 class _NoticeBoardScreenState extends State<NoticeBoardScreen> {
   AuthService authService = AuthService();
+  DBService dbService = DBService();
+  TextEditingController inputFieldController = TextEditingController();
+
+  String notification = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // this helps show keyboard appear at top and do not affect other widgets
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         leading: null,
         automaticallyImplyLeading: false,
@@ -51,9 +57,45 @@ class _NoticeBoardScreenState extends State<NoticeBoardScreen> {
           ),
         ],
       ),
-      body: Text(
-        'Notice board screen',
-        style: TextStyle(fontSize: 24),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Expanded(
+                child: CustomTextField(
+                  controller: inputFieldController,
+                  onChange: (value) {
+                    setState(() {
+                      notification = value;
+                    });
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: CustomButton(
+                  backgroundColor: Theme.of(context).primaryColor,
+                  title: Icon(
+                    Icons.add,
+                    size: 32,
+                  ),
+                  onPress: () {
+                    dbService.addNotification(
+                      notification,
+                      authService.currentUser!.email!,
+                    );
+                    inputFieldController.clear();
+                  },
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
