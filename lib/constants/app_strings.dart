@@ -10,4 +10,5 @@ abstract class AppStrings {
   static const cancel = 'Cancel';
   static const loading = 'loading....';
   static const ok = 'OK';
+  static const noNotifications = 'No notifications!';
 }
