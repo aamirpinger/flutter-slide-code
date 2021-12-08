@@ -37,6 +37,18 @@ class FirstChild extends StatelessWidget {
 class GrandChild extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<String>(globalValueProvider, (previous, current) {
+      // note: this callback executes when the provider value changes,
+      // not when the build method is called
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content:
+              Text("State changed, old value: $previous, new value $current"),
+          backgroundColor: Colors.red,
+        ),
+      );
+    });
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
