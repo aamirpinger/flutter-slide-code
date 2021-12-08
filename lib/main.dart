@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final globalValueProvider = Provider<String>((ref) => "Hello from Provider");
+final globalValueProvider =
+    StateProvider<String>((ref) => "Hello from Provider");
 
 void main() {
   runApp(
@@ -36,13 +37,25 @@ class FirstChild extends StatelessWidget {
 class GrandChild extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Text(
-      ref.watch(globalValueProvider),
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        fontSize: 48,
-        color: Colors.red,
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          ref.watch(globalValueProvider),
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 48,
+            color: Colors.red,
+          ),
+        ),
+        ElevatedButton(
+          child: Text("Change value"),
+          onPressed: () {
+            ref.read(globalValueProvider.notifier).state =
+                "Hello from Aamir Pinger.";
+          },
+        )
+      ],
     );
   }
 }
