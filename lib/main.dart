@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final globalValueProvider = Provider<String>((ref) => "Hello from Provider");
 
 void main() {
   runApp(
-    MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Parent(),
+    ProviderScope(
+      child: MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: Parent(),
+          ),
         ),
       ),
     ),
@@ -13,34 +18,26 @@ void main() {
 }
 
 class Parent extends StatelessWidget {
-  String value = "Hello from Parent Widget";
-
   @override
   Widget build(BuildContext context) {
-    return FirstChild(value: value);
+    return FirstChild();
   }
 }
 
 class FirstChild extends StatelessWidget {
-  const FirstChild({required this.value});
-
-  final String value;
+  const FirstChild();
 
   @override
   Widget build(BuildContext context) {
-    return GrandChild(value: value);
+    return GrandChild();
   }
 }
 
-class GrandChild extends StatelessWidget {
-  const GrandChild({required this.value});
-
-  final String value;
-
+class GrandChild extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Text(
-      value,
+      ref.watch(globalValueProvider),
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: 48,
