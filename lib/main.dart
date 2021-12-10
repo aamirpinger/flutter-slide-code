@@ -90,8 +90,34 @@ class GrandChild extends ConsumerWidget {
                 .read(valueProvider.notifier)
                 .update("Hello from State Notifier Provider.");
           },
-        )
+        ),
+        GrandGrandStatefulChild(),
       ],
+    );
+  }
+}
+
+// first change
+// extends StatefulWidget
+class GrandGrandStatefulChild extends ConsumerStatefulWidget {
+  @override
+  _GrandGrandStatefulChildState createState() =>
+      _GrandGrandStatefulChildState();
+}
+
+// second change
+// extends ConsumerState
+class _GrandGrandStatefulChildState
+    extends ConsumerState<GrandGrandStatefulChild> {
+  @override
+  Widget build(BuildContext context) {
+    // third: access the value
+    return Text(
+      ref.watch(valueProvider).value,
+      style: TextStyle(
+        color: Colors.teal,
+        fontSize: 18,
+      ),
     );
   }
 }
