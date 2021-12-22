@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/constants/app_strings.dart';
 import 'package:my_app/constants/configs.dart';
+import 'package:my_app/constants/error_strings.dart';
 import 'package:my_app/core/services/auth.dart';
 import 'package:my_app/core/services/loaderService.dart';
+import 'package:my_app/core/utils/alert.dart';
 import 'package:my_app/ui/screens/signup_screen.dart';
 import 'package:my_app/ui/widgets/custom_button.dart';
 import 'package:my_app/ui/widgets/custom_text_field.dart';
@@ -24,11 +26,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  Future<void> _login() async {
+  Future<void> _login(BuildContext context) async {
     try {
       await widget.auth.signInWithEmailPassword(
           email: widget.email, password: widget.password);
     } catch (e) {
+      ShowAlert(
+        context: context,
+        bodyText: ErrorStrings.loginError,
+        title: ErrorStrings.error,
+      );
       debugPrint(e.toString());
     }
   }
@@ -89,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: CustomButton(
                       backgroundColor: Theme.of(context).primaryColor,
                       title: Text(AppStrings.login),
-                      onPress: _login,
+                      onPress: () => _login(context),
                     ),
                   ),
                 ],
