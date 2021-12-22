@@ -1,23 +1,37 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:my_app/constants/app_strings.dart';
 import 'package:my_app/constants/configs.dart';
-import 'package:my_app/ui/screens/notice_board_screen.dart';
+import 'package:my_app/core/services/auth.dart';
+import 'package:my_app/core/services/loaderService.dart';
 import 'package:my_app/ui/screens/signup_screen.dart';
 import 'package:my_app/ui/widgets/custom_button.dart';
 import 'package:my_app/ui/widgets/custom_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
-  static const routeName = '/';
+  LoginScreen({
+    required this.auth,
+    required this.loaderService,
+  });
+
+  static const routeName = '/login';
+  final AuthBase auth;
+  final Loader loaderService;
+  String email = '';
+  String password = '';
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String email = '';
-  String password = '';
+  Future<void> _login() async {
+    try {
+      await widget.auth.signInWithEmailPassword(
+          email: widget.email, password: widget.password);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +51,8 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Image.asset(Configs.logoImage),
               CustomTextField(
-                onChange: (String value) => setState(() => email = value),
+                onChange: (String value) =>
+                    setState(() => widget.email = value),
                 hintText: AppStrings.enterEmail,
                 leading: Icon(
                   Icons.email_outlined,
@@ -46,7 +61,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               CustomTextField(
-                onChange: (String value) => setState(() => password = value),
+                onChange: (String value) =>
+                    setState(() => widget.password = value),
                 hintText: AppStrings.enterPassword,
                 leading: Icon(
                   Icons.password_outlined,
@@ -73,10 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: CustomButton(
                       backgroundColor: Theme.of(context).primaryColor,
                       title: Text(AppStrings.login),
-                      onPress: () {
-                        Navigator.pushNamed(
-                            context, NoticeBoardScreen.routeName);
-                      },
+                      onPress: _login,
                     ),
                   ),
                 ],

@@ -7,5 +7,6 @@ abstract class AppStrings {
   static const signup = 'Sign up';
   static const register = 'Register';
   static const cancel = 'Cancel';
+  static const close = 'close';
   static const loading = 'loading....';
 }
