@@ -5,6 +5,7 @@ import 'package:my_app/constants/configs.dart';
 import 'package:my_app/constants/error_strings.dart';
 import 'package:my_app/core/services/auth.dart';
 import 'package:my_app/core/services/loaderService.dart';
+import 'package:my_app/core/utils/alert.dart';
 import 'package:my_app/ui/widgets/custom_button.dart';
 import 'package:my_app/ui/widgets/custom_text_field.dart';
 
@@ -26,6 +27,13 @@ class _SignupScreenState extends State<SignupScreen> {
   String email = '';
   String password = '';
   String rePassword = '';
+
+  bool validatePassword(String pass1, String pass2) {
+    if (pass1 != pass2 || pass1.length < 6) {
+      return false;
+    }
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,35 +90,15 @@ class _SignupScreenState extends State<SignupScreen> {
                       backgroundColor: Theme.of(context).primaryColor,
                       title: Text(AppStrings.register),
                       onPress: () async {
-                        if (password == rePassword) {
+                        if (validatePassword(password, rePassword)) {
                           await widget.auth
                               .singup(email: email, password: password);
                           Navigator.pop(context);
                         } else {
-                          showDialog<void>(
+                          ShowAlert(
+                            title: ErrorStrings.error,
+                            bodyText: ErrorStrings.passwordError,
                             context: context,
-                            barrierDismissible: false, // user must tap button!
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text(ErrorStrings.error),
-                                content: SingleChildScrollView(
-                                  child: ListBody(
-                                    children: <Widget>[
-                                      Text(ErrorStrings.passwordIsNotSame),
-                                    ],
-                                  ),
-                                ),
-                                actions: [
-                                  CustomButton(
-                                    onPress: () => Navigator.pop(context),
-                                    title: Text(AppStrings.close),
-                                    backgroundColor:
-                                        Theme.of(context).primaryColor,
-                                  )
-                                ],
-                                actionsAlignment: MainAxisAlignment.center,
-                              );
-                            },
                           );
                         }
                       },
