@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:my_app/constants/app_strings.dart';
@@ -63,8 +64,13 @@ class AboutScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(18.0),
-              child: Text(AppStrings.aboutText),
-            )
+              child: AnimatedTextKit(
+                repeatForever: false,
+                animatedTexts: [
+                  TypewriterAnimatedText(AppStrings.aboutText),
+                ],
+              ),
+            ),
           ],
         ),
       ),
