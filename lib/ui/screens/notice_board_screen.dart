@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/constants/app_strings.dart';
+import 'package:my_app/core/services/auth.dart';
+import 'package:my_app/core/services/loaderService.dart';
 
 class NoticeBoardScreen extends StatefulWidget {
+  const NoticeBoardScreen({
+    required this.auth,
+    required this.loaderService,
+  });
+
   static const routeName = '/notice_board';
+  final AuthBase auth;
+  final Loader loaderService;
 
   @override
   _NoticeBoardScreenState createState() => _NoticeBoardScreenState();
@@ -22,9 +31,7 @@ class _NoticeBoardScreenState extends State<NoticeBoardScreen> {
         actions: [
           GestureDetector(
             child: Icon(Icons.logout),
-            onTap: () {
-              Navigator.pop(context);
-            },
+            onTap: widget.auth.signOut,
           ),
         ],
       ),
