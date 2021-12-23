@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 abstract class CustomTheme {
+  static Color primaryColor = Color(0xFF050A30);
+
   static final ThemeData theme = ThemeData(
       scaffoldBackgroundColor: Colors.white,
-      primaryColor: Color(0xFF050A30),
+      primaryColor: CustomTheme.primaryColor,
       colorScheme: ColorScheme.light(secondary: Colors.amber),
       appBarTheme: AppBarTheme(
-        backgroundColor: Color(0xFF050A30),
+        backgroundColor: CustomTheme.primaryColor,
       ),
       cardTheme: CardTheme(
           color: Colors.blueGrey.shade900,
@@ -17,12 +19,12 @@ abstract class CustomTheme {
         headline4: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 24,
-          color: Colors.white,
+          color: CustomTheme.primaryColor,
         ),
         headline5: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 36,
-          color: Colors.indigo,
+          color: CustomTheme.primaryColor,
         ),
       ));
 
@@ -30,10 +32,10 @@ abstract class CustomTheme {
     EasyLoading.instance
       ..loadingStyle = EasyLoadingStyle.custom
       ..progressColor = Colors.white
-      ..indicatorColor = Colors.blue
+      ..indicatorColor = CustomTheme.primaryColor
       ..backgroundColor = Colors.white
-      ..textColor = Colors.blue
-      ..maskColor = Colors.blue.withOpacity(0)
+      ..textColor = CustomTheme.primaryColor
+      ..maskColor = Colors.transparent
       ..userInteractions = true
       ..dismissOnTap = false;
   }
