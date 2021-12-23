@@ -30,7 +30,14 @@ class DrawerMenu extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Image.asset(Configs.logoImage),
+              child: Hero(
+                tag: Configs.logoImage,
+                child: Image.asset(
+                  Configs.logoImage,
+                  width: 100,
+                  height: 100,
+                ),
+              ),
             ),
             Divider(
               color: Theme.of(context).colorScheme.secondary,
