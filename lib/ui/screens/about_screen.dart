@@ -49,10 +49,13 @@ class AboutScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Image.asset(
-              Configs.logoImage,
-              width: 100,
-              height: 100,
+            Hero(
+              tag: Configs.logoImage,
+              child: Image.asset(
+                Configs.logoImage,
+                width: 100,
+                height: 100,
+              ),
             ),
             Divider(
               thickness: 1,
