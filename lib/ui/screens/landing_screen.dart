@@ -27,7 +27,6 @@ class LandingScreen extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.active) {
             loaderService.dismiss();
             final User? user = snapshot.data;
-            print(snapshot.data);
             if (user == null) {
               return LoginScreen(auth: auth, loaderService: loaderService);
             }
