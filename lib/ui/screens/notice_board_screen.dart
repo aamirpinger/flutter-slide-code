@@ -5,8 +5,9 @@ import 'package:my_app/core/services/db_service.dart';
 import 'package:my_app/core/services/loaderService.dart';
 import 'package:my_app/ui/widgets/custom_button.dart';
 import 'package:my_app/ui/widgets/custom_text_field.dart';
+import 'package:my_app/ui/widgets/notifications.dart';
 
-class NoticeBoardScreen extends StatefulWidget {
+class NoticeBoardScreen extends StatelessWidget {
   NoticeBoardScreen({
     required this.auth,
     required this.loaderService,
@@ -18,18 +19,12 @@ class NoticeBoardScreen extends StatefulWidget {
   final Loader loaderService;
   final DBBase dbService;
   TextEditingController inputFieldController = TextEditingController();
-  String notification = '';
 
-  @override
-  _NoticeBoardScreenState createState() => _NoticeBoardScreenState();
-}
-
-class _NoticeBoardScreenState extends State<NoticeBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // this helps show keyboard appear at top and do not affect other widgets
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         leading: null,
         automaticallyImplyLeading: false,
@@ -38,7 +33,7 @@ class _NoticeBoardScreenState extends State<NoticeBoardScreen> {
         actions: [
           GestureDetector(
             child: Icon(Icons.logout),
-            onTap: widget.auth.signOut,
+            onTap: auth.signOut,
           ),
         ],
       ),
@@ -46,6 +41,12 @@ class _NoticeBoardScreenState extends State<NoticeBoardScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Expanded(
+            child: Notifications(
+              authService: auth,
+              dbService: dbService,
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,12 +54,8 @@ class _NoticeBoardScreenState extends State<NoticeBoardScreen> {
             children: [
               Expanded(
                 child: CustomTextField(
-                  controller: widget.inputFieldController,
-                  onChange: (value) {
-                    setState(() {
-                      widget.notification = value;
-                    });
-                  },
+                  controller: inputFieldController,
+                  onChange: (value) {},
                 ),
               ),
               Padding(
@@ -70,11 +67,11 @@ class _NoticeBoardScreenState extends State<NoticeBoardScreen> {
                     size: 32,
                   ),
                   onPress: () {
-                    widget.dbService.addNotification(
-                      widget.notification,
-                      widget.auth.currentUser!.email!,
+                    dbService.addNotification(
+                      inputFieldController.value.text,
+                      auth.currentUser!.email!,
                     );
-                    widget.inputFieldController.clear();
+                    inputFieldController.clear();
                   },
                 ),
               ),

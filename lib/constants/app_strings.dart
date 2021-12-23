@@ -9,4 +9,6 @@ abstract class AppStrings {
   static const cancel = 'Cancel';
   static const close = 'close';
   static const loading = 'loading....';
+  static const noNotifications = 'No notifications!';
+  static const textSeparator = '-';
 }
