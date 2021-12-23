@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/core/services/auth.dart';
 import 'package:my_app/core/services/db_service.dart';
 import 'package:my_app/core/services/loaderService.dart';
+import 'package:my_app/ui/screens/about_screen.dart';
 import 'package:my_app/ui/screens/landing_screen.dart';
 import 'package:my_app/ui/screens/login_screen.dart';
 import 'package:my_app/ui/screens/notice_board_screen.dart';
@@ -30,7 +31,12 @@ abstract class CustomRoutes {
         return MaterialPageRoute(
             builder: (_) =>
                 SignupScreen(auth: auth, loaderService: loaderService));
-
+      case AboutScreen.routeName:
+        return MaterialPageRoute(
+            settings: RouteSettings(name: AboutScreen.routeName),
+            builder: (_) => AboutScreen(
+                  auth: auth,
+                ));
       default:
         return MaterialPageRoute(
             builder: (_) => LandingScreen(

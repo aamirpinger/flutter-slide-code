@@ -5,6 +5,7 @@ import 'package:my_app/core/services/db_service.dart';
 import 'package:my_app/core/services/loaderService.dart';
 import 'package:my_app/ui/widgets/custom_button.dart';
 import 'package:my_app/ui/widgets/custom_text_field.dart';
+import 'package:my_app/ui/widgets/drawer_menu.dart';
 import 'package:my_app/ui/widgets/notifications.dart';
 
 class NoticeBoardScreen extends StatelessWidget {
@@ -25,9 +26,10 @@ class NoticeBoardScreen extends StatelessWidget {
     return Scaffold(
       // this helps show keyboard appear at top and do not affect other widgets
       resizeToAvoidBottomInset: true,
+      drawer: DrawerMenu(),
       appBar: AppBar(
-        leading: null,
-        automaticallyImplyLeading: false,
+        // leading: null,
+        // automaticallyImplyLeading: false,
         title: Text(AppStrings.appTitle),
         centerTitle: true,
         actions: [
