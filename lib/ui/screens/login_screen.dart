@@ -66,6 +66,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Theme.of(context).appBarTheme.backgroundColor,
                   size: 32,
                 ),
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.emailAddress,
               ),
               CustomTextField(
                 onChange: (String value) =>
@@ -76,6 +78,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Theme.of(context).appBarTheme.backgroundColor,
                   size: 32,
                 ),
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.done,
                 obscureText: true,
               ),
               Row(

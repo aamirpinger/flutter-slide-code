@@ -7,8 +7,12 @@ class CustomTextField extends StatelessWidget {
     this.hintText = '',
     this.leading,
     this.obscureText = false,
+    this.textInputAction = TextInputAction.done,
+    this.keyboardType = TextInputType.text,
   });
 
+  final TextInputType keyboardType;
+  final TextInputAction textInputAction;
   final Function(String) onChange;
   final TextEditingController? controller;
   final String? hintText;
@@ -21,6 +25,8 @@ class CustomTextField extends StatelessWidget {
       padding: EdgeInsets.all(15.0),
       child: TextField(
         controller: controller,
+        textInputAction: textInputAction,
+        keyboardType: keyboardType,
         style: TextStyle(
           color: Colors.black,
           fontSize: 18,

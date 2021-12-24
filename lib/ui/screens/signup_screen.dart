@@ -60,6 +60,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   color: Theme.of(context).appBarTheme.backgroundColor,
                   size: 32,
                 ),
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.emailAddress,
               ),
               CustomTextField(
                 onChange: (String value) => setState(() => password = value),
@@ -69,6 +71,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   color: Theme.of(context).appBarTheme.backgroundColor,
                   size: 32,
                 ),
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.text,
                 obscureText: true,
               ),
               CustomTextField(
@@ -79,6 +83,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   color: Theme.of(context).appBarTheme.backgroundColor,
                   size: 32,
                 ),
+                textInputAction: TextInputAction.done,
+                keyboardType: TextInputType.text,
                 obscureText: true,
               ),
               Row(
