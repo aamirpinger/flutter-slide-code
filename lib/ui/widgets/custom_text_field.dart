@@ -9,8 +9,12 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.textInputAction = TextInputAction.done,
     this.keyboardType = TextInputType.text,
+    this.focusNode,
+    this.onEditingComplete,
   });
 
+  final FocusNode? focusNode;
+  final Function()? onEditingComplete;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final Function(String) onChange;
@@ -27,6 +31,8 @@ class CustomTextField extends StatelessWidget {
         controller: controller,
         textInputAction: textInputAction,
         keyboardType: keyboardType,
+        focusNode: focusNode,
+        onEditingComplete: onEditingComplete,
         style: TextStyle(
           color: Colors.black,
           fontSize: 18,
