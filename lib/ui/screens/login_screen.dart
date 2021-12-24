@@ -20,14 +20,20 @@ class LoginScreen extends StatefulWidget {
   final Loader loaderService;
   String email = '';
   String password = '';
+  bool isLoading = false;
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  Future<void> _login(BuildContext context) async {
+  Future<void> _login() async {
     try {
+      print('clicked');
+      setState(() {
+        widget.isLoading = true;
+      });
+
       await widget.auth.signInWithEmailPassword(
           email: widget.email, password: widget.password);
     } catch (e) {
@@ -36,8 +42,24 @@ class _LoginScreenState extends State<LoginScreen> {
         bodyText: ErrorStrings.loginError,
         title: ErrorStrings.error,
       );
+      _focusEmailInput();
       debugPrint(e.toString());
+    } finally {
+      setState(() {
+        widget.isLoading = false;
+      });
     }
+  }
+
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+
+  void _focusEmailInput() {
+    FocusScope.of(context).requestFocus(_emailFocusNode);
+  }
+
+  void _emailEditingComplete() {
+    FocusScope.of(context).requestFocus(_passwordFocusNode);
   }
 
   @override
@@ -68,6 +90,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.emailAddress,
+                focusNode: _emailFocusNode,
+                onEditingComplete: _emailEditingComplete,
               ),
               CustomTextField(
                 onChange: (String value) =>
@@ -81,6 +105,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.done,
                 obscureText: true,
+                focusNode: _passwordFocusNode,
+                onEditingComplete: _login,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -98,10 +124,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: CustomButton(
-                      backgroundColor: Theme.of(context).primaryColor,
-                      title: Text(AppStrings.login),
-                      onPress: () => _login(context),
-                    ),
+                        backgroundColor: Theme.of(context).primaryColor,
+                        title: Text(AppStrings.login),
+                        onPress: widget.isLoading ? null : _login),
                   ),
                 ],
               ),
