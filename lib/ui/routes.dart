@@ -1,6 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_app/core/services/auth.dart';
 import 'package:my_app/core/services/db_service.dart';
 import 'package:my_app/core/services/loaderService.dart';
 import 'package:my_app/ui/screens/about_screen.dart';
@@ -11,7 +9,6 @@ import 'package:my_app/ui/screens/signup_screen.dart';
 
 abstract class CustomRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    AuthBase auth = Auth();
     Loader loaderService = LoaderService();
     DBBase fireStoreService = FireStoreService();
 
@@ -19,28 +16,22 @@ abstract class CustomRoutes {
       case NoticeBoardScreen.routeName:
         return MaterialPageRoute(
             builder: (_) => NoticeBoardScreen(
-                  auth: auth,
                   loaderService: loaderService,
                   dbService: fireStoreService,
                 ));
       case LoginScreen.routeName:
         return MaterialPageRoute(
-            builder: (_) =>
-                LoginScreen(auth: auth, loaderService: loaderService));
+            builder: (_) => LoginScreen(loaderService: loaderService));
       case SignupScreen.routeName:
         return MaterialPageRoute(
-            builder: (_) =>
-                SignupScreen(auth: auth, loaderService: loaderService));
+            builder: (_) => SignupScreen(loaderService: loaderService));
       case AboutScreen.routeName:
         return MaterialPageRoute(
             settings: RouteSettings(name: AboutScreen.routeName),
-            builder: (_) => AboutScreen(
-                  auth: auth,
-                ));
+            builder: (_) => AboutScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => LandingScreen(
-                  auth: auth,
                   loaderService: loaderService,
                   dbService: fireStoreService,
                 ));

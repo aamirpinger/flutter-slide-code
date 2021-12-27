@@ -1,20 +1,20 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_app/constants/app_strings.dart';
 import 'package:my_app/constants/configs.dart';
+import 'package:my_app/core/providers/auth_provider.dart';
 import 'package:my_app/core/services/auth.dart';
 import 'package:my_app/core/utils/alert.dart';
 import 'package:my_app/ui/widgets/custom_button.dart';
 
-class AboutScreen extends StatelessWidget {
-  AboutScreen({required this.auth});
+class AboutScreen extends ConsumerWidget {
   static const String routeName = '/about';
 
-  AuthBase auth;
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    AuthBase auth = ref.watch(authProvider);
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       // this helps show keyboard appear at top and do not affect other widgets

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_app/constants/app_strings.dart';
+import 'package:my_app/core/providers/auth_provider.dart';
 import 'package:my_app/core/services/auth.dart';
 import 'package:my_app/core/services/db_service.dart';
 import 'package:my_app/core/services/loaderService.dart';
@@ -8,21 +10,21 @@ import 'package:my_app/ui/widgets/custom_text_field.dart';
 import 'package:my_app/ui/widgets/drawer_menu.dart';
 import 'package:my_app/ui/widgets/notifications.dart';
 
-class NoticeBoardScreen extends StatelessWidget {
+class NoticeBoardScreen extends ConsumerWidget {
   NoticeBoardScreen({
-    required this.auth,
     required this.loaderService,
     required this.dbService,
   });
 
   static const routeName = '/notice_board';
-  final AuthBase auth;
+
   final Loader loaderService;
   final DBBase dbService;
   TextEditingController inputFieldController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    AuthBase auth = ref.watch(authProvider);
     return Scaffold(
       // this helps show keyboard appear at top and do not affect other widgets
       resizeToAvoidBottomInset: true,
