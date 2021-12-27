@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_app/constants/app_strings.dart';
 import 'package:my_app/constants/configs.dart';
 import 'package:my_app/constants/error_strings.dart';
+import 'package:my_app/core/providers/auth_provider.dart';
 import 'package:my_app/core/services/auth.dart';
 import 'package:my_app/core/services/loaderService.dart';
 import 'package:my_app/core/utils/alert.dart';
@@ -9,14 +11,12 @@ import 'package:my_app/ui/screens/signup_screen.dart';
 import 'package:my_app/ui/widgets/custom_button.dart';
 import 'package:my_app/ui/widgets/custom_text_field.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   LoginScreen({
-    required this.auth,
     required this.loaderService,
   });
 
   static const routeName = '/login';
-  final AuthBase auth;
   final Loader loaderService;
   String email = '';
   String password = '';
@@ -26,7 +26,14 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
+  AuthBase? auth;
+
+  @override
+  void initState() {
+    auth = ref.read(authProvider);
+  }
+
   Future<void> _login() async {
     try {
       print('clicked');
@@ -34,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
         widget.isLoading = true;
       });
 
-      await widget.auth.signInWithEmailPassword(
+      await auth?.signInWithEmailPassword(
           email: widget.email, password: widget.password);
     } catch (e) {
       ShowAlert(
