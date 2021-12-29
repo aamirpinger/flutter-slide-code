@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_app/constants/error_strings.dart';
 import 'package:my_app/core/modal/notice.dart';
+import 'package:my_app/core/providers/auth_provider.dart';
+import 'package:my_app/core/providers/loader_provider.dart';
 import 'package:my_app/core/services/auth.dart';
 import 'package:my_app/core/services/db_service.dart';
-import 'package:my_app/ui/widgets/text_notification.dart';
+import 'package:my_app/core/services/loader_service.dart';
 import 'package:my_app/ui/widgets/notification_bubble.dart';
+import 'package:my_app/ui/widgets/text_notification.dart';
 
-class Notifications extends StatelessWidget {
-  Notifications({required this.authService, required this.dbService});
+class Notifications extends ConsumerWidget {
+  Notifications({required this.dbService});
 
-  AuthBase authService;
   DBBase dbService;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final Loader loaderService = ref.watch(loaderProvider);
+    AuthBase auth = ref.watch(authProvider);
     // what is stream builder?
     // Widget that builds itself based on the latest snapshot of interaction with a Stream.
     return StreamBuilder<List<Notice>>(
       stream: dbService.getDataStream(),
       builder: (context, snapshot) {
-        EasyLoading.dismiss();
+        loaderService.dismiss();
 
         if (snapshot.hasData) {
           final children = snapshot.data!

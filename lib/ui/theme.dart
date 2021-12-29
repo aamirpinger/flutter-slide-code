@@ -27,16 +27,4 @@ abstract class CustomTheme {
           color: CustomTheme.primaryColor,
         ),
       ));
-
-  static void configEasyLoading() {
-    EasyLoading.instance
-      ..loadingStyle = EasyLoadingStyle.custom
-      ..progressColor = Colors.white
-      ..indicatorColor = CustomTheme.primaryColor
-      ..backgroundColor = Colors.white
-      ..textColor = CustomTheme.primaryColor
-      ..maskColor = Colors.transparent
-      ..userInteractions = true
-      ..dismissOnTap = false;
-  }
 }

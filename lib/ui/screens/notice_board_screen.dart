@@ -4,7 +4,7 @@ import 'package:my_app/constants/app_strings.dart';
 import 'package:my_app/core/providers/auth_provider.dart';
 import 'package:my_app/core/services/auth.dart';
 import 'package:my_app/core/services/db_service.dart';
-import 'package:my_app/core/services/loaderService.dart';
+import 'package:my_app/core/utils/signout.dart';
 import 'package:my_app/ui/widgets/custom_button.dart';
 import 'package:my_app/ui/widgets/custom_text_field.dart';
 import 'package:my_app/ui/widgets/drawer_menu.dart';
@@ -12,13 +12,11 @@ import 'package:my_app/ui/widgets/notifications.dart';
 
 class NoticeBoardScreen extends ConsumerWidget {
   NoticeBoardScreen({
-    required this.loaderService,
     required this.dbService,
   });
 
   static const routeName = '/notice_board';
 
-  final Loader loaderService;
   final DBBase dbService;
   TextEditingController inputFieldController = TextEditingController();
 
@@ -37,7 +35,9 @@ class NoticeBoardScreen extends ConsumerWidget {
         actions: [
           GestureDetector(
             child: Icon(Icons.logout),
-            onTap: auth.signOut,
+            onTap: () {
+              signout(context, ref);
+            },
           ),
         ],
       ),
@@ -47,7 +47,6 @@ class NoticeBoardScreen extends ConsumerWidget {
         children: [
           Expanded(
             child: Notifications(
-              authService: auth,
               dbService: dbService,
             ),
           ),

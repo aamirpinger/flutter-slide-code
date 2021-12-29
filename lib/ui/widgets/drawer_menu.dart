@@ -49,12 +49,9 @@ class DrawerMenu extends StatelessWidget {
                 // to modalRoute work, we need to add settings parameter at routes, check route.dart file
                 if (ModalRoute.of(context)?.settings.name !=
                     NoticeBoardScreen.routeName) {
-                  Navigator.pushNamed(
-                    context,
-                    NoticeBoardScreen.routeName,
-                  );
+                  Navigator.pushNamed(context, NoticeBoardScreen.routeName);
                 } else {
-                  Navigator.pop(context);
+                  Navigator.maybePop(context);
                 }
               },
             ),

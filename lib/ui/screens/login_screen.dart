@@ -5,19 +5,13 @@ import 'package:my_app/constants/configs.dart';
 import 'package:my_app/constants/error_strings.dart';
 import 'package:my_app/core/providers/auth_provider.dart';
 import 'package:my_app/core/services/auth.dart';
-import 'package:my_app/core/services/loaderService.dart';
 import 'package:my_app/core/utils/alert.dart';
 import 'package:my_app/ui/screens/signup_screen.dart';
 import 'package:my_app/ui/widgets/custom_button.dart';
 import 'package:my_app/ui/widgets/custom_text_field.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
-  LoginScreen({
-    required this.loaderService,
-  });
-
   static const routeName = '/login';
-  final Loader loaderService;
   String email = '';
   String password = '';
   bool isLoading = false;

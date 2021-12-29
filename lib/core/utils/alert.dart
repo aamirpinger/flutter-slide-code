@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/constants/app_strings.dart';
-import 'package:my_app/constants/error_strings.dart';
 import 'package:my_app/ui/widgets/custom_button.dart';
 
 Future<void> ShowAlert({
@@ -13,7 +12,7 @@ Future<void> ShowAlert({
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text(ErrorStrings.error),
+        title: Text(title),
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
