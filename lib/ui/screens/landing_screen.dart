@@ -25,19 +25,15 @@ class LandingScreen extends ConsumerWidget {
     return StreamBuilder<User?>(
         stream: _authState,
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.active) {
+          if (snapshot.hasData) {
             loaderService.dismiss();
             final User? user = snapshot.data;
             print(user?.email);
-            if (user == null) {
-              return LoginScreen();
-            }
 
             return NoticeBoardScreen(dbService: dbService);
           }
 
-          loaderService.show(message: AppStrings.loading);
-          return Container();
+          return LoginScreen();
         });
   }
 }
