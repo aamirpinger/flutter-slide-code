@@ -39,10 +39,19 @@ class MeaningCard extends StatelessWidget {
                       )
                     : Container(),
                 word.audioUrl.isNotEmpty
-                    ? Icon(
-                        Icons.volume_up,
-                        color: Colors.white,
-                        size: 32,
+                    ? GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/audio_player',
+                            arguments: word.audioUrl,
+                          );
+                        },
+                        child: Icon(
+                          Icons.volume_up,
+                          color: Colors.white,
+                          size: 32,
+                        ),
                       )
                     : Container(),
               ],
