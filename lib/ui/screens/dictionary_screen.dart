@@ -16,6 +16,8 @@ class DictionaryScreen extends StatefulWidget {
 
 class _DictionaryScreenState extends State<DictionaryScreen> {
   DictionaryService dictionaryService = DictionaryService();
+  TextEditingController searchFieldController = TextEditingController();
+
   String searchingWord = '';
   Word? word;
 
@@ -64,6 +66,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
     EasyLoading.dismiss();
 
     if (response != null) {
+      searchFieldController.clear();
       setState(() {
         searchingWord = '';
         word = response;
@@ -85,6 +88,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           CustomTextField(
+            controller: searchFieldController,
             onChange: updateUI,
           ),
           Row(

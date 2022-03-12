@@ -4,15 +4,18 @@ import 'package:my_app/constants/app_strings.dart';
 class CustomTextField extends StatelessWidget {
   CustomTextField({
     required this.onChange,
+    this.controller,
   });
 
   final Function(String) onChange;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(15.0),
       child: TextField(
+        controller: controller,
         style: TextStyle(
           color: Colors.black,
           fontSize: 18,
