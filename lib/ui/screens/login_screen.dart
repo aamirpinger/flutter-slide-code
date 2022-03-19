@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // this helps show keyboard appear at top and do not affect other widgets
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(AppStrings.appTitle),
         centerTitle: true,
